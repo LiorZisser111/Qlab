@@ -25,7 +25,7 @@ namespace Qlab
             int num = 10;
             Console.WriteLine("\nCheck if the number " + num + " existed in the queue: ");
             Console.WriteLine(CheckIfNumExisting(q, 10));
-
+             
             num = 2;
             Console.WriteLine("\nCheck if the number " + num + " is perfect: ");
             Console.WriteLine(CheckSumOfNeighbors(q, 2));
@@ -49,7 +49,42 @@ namespace Qlab
             Console.WriteLine(q3);
             Console.WriteLine("Sorted queue with new number inserted:");
             Queue<int> sortedQueue = SortedQueue(q3, 0);
+            Console.WriteLine(q3);
             Console.WriteLine(sortedQueue);
+
+
+            Queue<int> q4 = new Queue<int>();
+            q4.Insert(-1);
+            q4.Insert(1);
+            q4.Insert(2);
+            q4.Insert(3);
+            Console.WriteLine("\nSorted the queue form low to high number: ");
+            Console.WriteLine("Original queue:");
+            Console.WriteLine(q3);
+            Console.WriteLine("Sorted queue with new number inserted:");
+            Queue<int> sortedQueue2 = SortedQueue(q4, 17);
+            Console.WriteLine(q4);
+            Console.WriteLine(sortedQueue2);
+
+            student s1 = new("mark",40);
+            student s2 = new("yahin",57);
+            student s3 = new("igor",85);
+            student s4 = new("larisa",100);
+
+            Queue<student> q5 = new Queue<student>();
+            q5.Insert(s1);
+            q5.Insert(s2);
+            q5.Insert(s3);
+            q5.Insert(s4);
+            Console.WriteLine("\nSorted the queue form low to high grade: ");
+            Console.WriteLine("Original queue:");
+            Console.WriteLine(q5);
+            Console.WriteLine("Sorted queue with new grade inserted:");
+            Queue<student> sortedQueueGrade = SortedQueue(q5, 60);
+            Console.WriteLine(q5);
+            Console.WriteLine(sortedQueueGrade);
+
+
         }
 
         public static Queue<int> SetQCopy(Queue<int> q)
@@ -158,10 +193,13 @@ namespace Qlab
         {
             //The function receives a queue with ints and a number
             //Returns a queue sorted with the new number
+            //Queue<int> sortedQueue = new Queue<int>();
             Queue<int> qCopy = SetQCopy(q);
-            Queue<int> sortedQueue = new Queue<int>();
             bool inserted = false;
-
+            while(!q.IsEmpty())
+            {
+                q.Remove();
+            }
             while (!qCopy.IsEmpty())
             {
                 int currItem = qCopy.Remove();
@@ -169,18 +207,18 @@ namespace Qlab
                 // If we haven't entered the new number yet
                 if (!inserted && num < currItem)
                 {
-                    sortedQueue.Insert(num);
+                    q.Insert(num);
                     inserted = true;
                 }
                 //enter the current number
-                sortedQueue.Insert(currItem);
+                q.Insert(currItem);
             }
             //If the new number is the biggest
             if (!inserted)
             {
-                sortedQueue.Insert(num);
+                q.Insert(num);
             }
-            return sortedQueue;
+            return q;
         }
     }
 }
