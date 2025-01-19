@@ -145,6 +145,10 @@ namespace Qlab
                 }
                 //Using the function to check if the number is perfect
                 isPerfect = CheckSumOfNeighbors(q, i);
+                if(isPerfect == false)
+                {
+                    return isPerfect;
+                }
                 i++;
             }
             return isPerfect;
