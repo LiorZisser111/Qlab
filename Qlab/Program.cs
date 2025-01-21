@@ -1,5 +1,6 @@
-﻿using System;
-
+using System;
+//lior zisser 21/1/2025
+//ניסיתי לעשות את האתגר אבל לא היה לי הרבה זמן אז לא הספקתי להיגע לסיומו
 namespace Qlab
 {
     public class Program
@@ -25,7 +26,7 @@ namespace Qlab
             int num = 10;
             Console.WriteLine("\nCheck if the number " + num + " existed in the queue: ");
             Console.WriteLine(CheckIfNumExisting(q, 10));
-             
+
             num = 2;
             Console.WriteLine("\nCheck if the number " + num + " is perfect: ");
             Console.WriteLine(CheckSumOfNeighbors(q, 2));
@@ -65,11 +66,11 @@ namespace Qlab
             Queue<int> sortedQueue2 = SortedQueue(q4, 17);
             Console.WriteLine(q4);
             Console.WriteLine(sortedQueue2);
-
-            student s1 = new("mark",40);
-            student s2 = new("yahin",57);
-            student s3 = new("igor",85);
-            student s4 = new("larisa",100);
+            /*
+            student s1 = new("mark", 40);
+            student s2 = new("yahin", 57);
+            student s3 = new("igor", 85);
+            student s4 = new("larisa", 100);
 
             Queue<student> q5 = new Queue<student>();
             q5.Insert(s1);
@@ -83,7 +84,7 @@ namespace Qlab
             Queue<student> sortedQueueGrade = SortedQueue(q5, 60);
             Console.WriteLine(q5);
             Console.WriteLine(sortedQueueGrade);
-
+            */
 
         }
 
@@ -180,7 +181,7 @@ namespace Qlab
                 }
                 //Using the function to check if the number is perfect
                 isPerfect = CheckSumOfNeighbors(q, i);
-                if(isPerfect == false)
+                if (isPerfect == false)
                 {
                     return isPerfect;
                 }
@@ -196,7 +197,7 @@ namespace Qlab
             //Queue<int> sortedQueue = new Queue<int>();
             Queue<int> qCopy = SetQCopy(q);
             bool inserted = false;
-            while(!q.IsEmpty())
+            while (!q.IsEmpty())
             {
                 q.Remove();
             }
@@ -220,5 +221,38 @@ namespace Qlab
             }
             return q;
         }
+        /*
+        public static Queue<student> SortedQueue(Queue<student> q, student newStudent)
+        {
+            // The function receives a queue of students and a new student
+            // Returns a queue sorted by grade with the new student added
+
+            Queue<student> qCopy = SetQCopy(q);
+            Queue<student> sortedQueue = new Queue<student>();
+            bool inserted = false;
+
+            while (!qCopy.IsEmpty())
+            {
+                student current = qCopy.Remove();
+
+                // Insert the new student in the correct position
+                if (!inserted && newStudent.GetGrade() < current.GetGrade()) 
+                {
+                    sortedQueue.Insert(newStudent);
+                    inserted = true;
+                }
+
+                // Add the current student
+                sortedQueue.Insert(current);
+            }
+
+            // If the new student has the highest grade, insert at the end
+            if (!inserted)
+            {
+                sortedQueue.Insert(newStudent);
+            }
+
+            return sortedQueue;
+        }*/
     }
 }
