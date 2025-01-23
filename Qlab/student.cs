@@ -24,7 +24,7 @@ namespace Qlab
 
         public override string ToString()
         {
-            return this.name+": "+this.grade;
+            return " "+this.name+": "+this.grade;
         }
     }
 }

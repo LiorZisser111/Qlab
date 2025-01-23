@@ -63,36 +63,42 @@ namespace Qlab
             Console.WriteLine("Original queue:");
             Console.WriteLine(q3);
             Console.WriteLine("Sorted queue with new number inserted:");
-            Queue<int> sortedQueue2 = SortedQueue(q4, 17);
+            Queue<int> sortedQueue2 = SortedQueue(q4, 4);
             Console.WriteLine(q4);
             Console.WriteLine(sortedQueue2);
-            /*
+            
             student s1 = new("mark", 40);
             student s2 = new("yahin", 57);
             student s3 = new("igor", 85);
             student s4 = new("larisa", 100);
+            student s5 = new("Yosi", 72);
 
             Queue<student> q5 = new Queue<student>();
             q5.Insert(s1);
             q5.Insert(s2);
             q5.Insert(s3);
             q5.Insert(s4);
+
             Console.WriteLine("\nSorted the queue form low to high grade: ");
             Console.WriteLine("Original queue:");
             Console.WriteLine(q5);
             Console.WriteLine("Sorted queue with new grade inserted:");
-            Queue<student> sortedQueueGrade = SortedQueue(q5, 60);
+            Queue<student> sortedQueueGrade = SortedQueueS(q5, s5);
             Console.WriteLine(q5);
             Console.WriteLine(sortedQueueGrade);
-            */
 
+            Console.Write("\n");
+            Queue<student> q6 = new Queue<student>();
+            Queue<student> sortedQueueGrade2 = SortedQueueS(q6, s5);
+            Console.WriteLine(q6);
+            Console.WriteLine(sortedQueueGrade2);
         }
 
-        public static Queue<int> SetQCopy(Queue<int> q)
+        public static Queue<T> SetQCopy<T>(Queue<T> q)
         {
-            Queue<int> qCopy = new();
-            Queue<int> qTemp = new();
-            int currItem;
+            Queue<T> qCopy = new();
+            Queue<T> qTemp = new();
+            T currItem;
             //פריקת התור המקורי ויצירת תור העתק ותור זמני
             while (!q.IsEmpty())
             {
@@ -107,6 +113,7 @@ namespace Qlab
             }
             return qCopy;
         }
+
 
         public static bool CheckIfNumExisting(Queue<int> q, int num)
         {
@@ -197,6 +204,11 @@ namespace Qlab
             //Queue<int> sortedQueue = new Queue<int>();
             Queue<int> qCopy = SetQCopy(q);
             bool inserted = false;
+            if (qCopy.IsEmpty())
+            {
+                q.Insert(num);
+                return q;
+            }
             while (!q.IsEmpty())
             {
                 q.Remove();
@@ -221,16 +233,24 @@ namespace Qlab
             }
             return q;
         }
-        /*
-        public static Queue<student> SortedQueue(Queue<student> q, student newStudent)
+
+
+
+
+        // Student class:
+        public static Queue<student> SortedQueueS(Queue<student> q, student newStudent)
         {
             // The function receives a queue of students and a new student
             // Returns a queue sorted by grade with the new student added
-
-            Queue<student> qCopy = SetQCopy(q);
-            Queue<student> sortedQueue = new Queue<student>();
+           
+            Queue<student> qCopy = SetQCopyS(q);
             bool inserted = false;
-
+            Queue<student> orderQ = EmptyQ2Copy(q);
+            if (qCopy.IsEmpty())
+            {
+                q.Insert(newStudent);
+                return q;
+            }
             while (!qCopy.IsEmpty())
             {
                 student current = qCopy.Remove();
@@ -238,21 +258,51 @@ namespace Qlab
                 // Insert the new student in the correct position
                 if (!inserted && newStudent.GetGrade() < current.GetGrade()) 
                 {
-                    sortedQueue.Insert(newStudent);
+                    q.Insert(newStudent);
                     inserted = true;
                 }
 
                 // Add the current student
-                sortedQueue.Insert(current);
+                q.Insert(current);
             }
 
             // If the new student has the highest grade, insert at the end
             if (!inserted)
             {
-                sortedQueue.Insert(newStudent);
+                q.Insert(newStudent);
             }
+            return q;
+        }
 
-            return sortedQueue;
-        }*/
+        public static Queue<student> SetQCopyS(Queue<student> q)
+        {
+            Queue<student> qCopy = new();
+            Queue<student> qTemp = new();
+            student currItem;
+            //פריקת התור המקורי ויצירת תור העתק ותור זמני
+            while (!q.IsEmpty())
+            {
+                currItem = q.Remove();
+                qTemp.Insert(currItem);
+                qCopy.Insert(currItem);
+            }
+            //שחזור התור המקורי
+            while (!qTemp.IsEmpty())
+            {
+                q.Insert(qTemp.Remove());
+            }
+            return qCopy;
+        }
+
+        public static Queue<T> EmptyQ2Copy<T>(Queue<T> q)
+        {
+            Queue<T> qCopy = SetQCopy(q);
+            while (!q.IsEmpty())
+            {
+                T curr = q.Remove();
+                qCopy.Insert(curr);
+            }
+            return qCopy;
+        }
     }
 }
