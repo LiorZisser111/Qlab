@@ -304,5 +304,32 @@ namespace Qlab
             }
             return qCopy;
         }
+
+            public static int LastAndRemove(Queue<int> q)
+        {
+            int queueLength = 0;
+            int result = 0;
+            Queue<int> qCopy = SetQCopy(q);
+            while (!q.IsEmpty())
+            {
+                q.Remove();
+                queueLength++;
+            }
+
+            for(int i = 1; i <= queueLength; i++)
+            {
+                if(i < queueLength)
+                {
+                    int number = qCopy.Remove();
+                    q.Insert(number);
+                }
+                else
+                {
+                    result = qCopy.Remove();
+                }
+            }
+            Console.WriteLine(q);
+            return result;
+        }
     }
 }
