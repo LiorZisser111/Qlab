@@ -119,6 +119,16 @@ namespace Qlab
             Console.WriteLine("\nOriginal queue:");
             Console.WriteLine(q8);
             Console.WriteLine("The new queue: "+ OrgQ2couples(q8));
+
+
+
+            Queue<int> q9 = new Queue<int>();
+            q9.Insert(5);
+            q9.Insert(8);
+            q9.Insert(16);
+            q9.Insert(29);
+
+            Console.WriteLine("The result: "+ TwoSum(q9,20));
         }
 
         public static Queue<T> SetQCopy<T>(Queue<T> q)
@@ -367,6 +377,23 @@ namespace Qlab
                 q2Num.Insert(num);
             }
             return q2Num;
+        }
+
+        public static bool TwoSum(Queue<int> q, int x)
+        {
+            while (!q.IsEmpty())
+            {
+                int head = q.Remove();
+                Queue<int> qCopy = SetQCopy(q);
+                for (int i = 1;i < q.Size();i++)
+                {
+                    if(head + qCopy.Remove() == x)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
 
