@@ -7,6 +7,7 @@ namespace Qlab
     {
         public static void Main(string[] args)
         {
+            /*
             Console.WriteLine("Hello, World!");
 
             Queue<int> q = new Queue<int>();
@@ -66,7 +67,7 @@ namespace Qlab
             Queue<int> sortedQueue2 = SortedQueue(q4, 4);
             Console.WriteLine(q4);
             Console.WriteLine(sortedQueue2);
-            
+
             student s1 = new("mark", 40);
             student s2 = new("yahin", 57);
             student s3 = new("igor", 85);
@@ -92,6 +93,32 @@ namespace Qlab
             Queue<student> sortedQueueGrade2 = SortedQueueS(q6, s5);
             Console.WriteLine(q6);
             Console.WriteLine(sortedQueueGrade2);
+            */
+            Queue<int> q7 = new Queue<int>();
+            q7.Insert(5);
+            q7.Insert(8);
+            q7.Insert(12);
+            q7.Insert(20);
+
+            Console.WriteLine("\nOriginal queue:");
+            Console.WriteLine(q7);
+
+            int lastRemoved = LastAndRemove(q7);
+            Console.WriteLine("Last removed element: " + lastRemoved);
+
+            Console.WriteLine("Queue after removal:");
+            Console.WriteLine(q7);
+
+
+            Queue<int> q8 = new Queue<int>();
+            q8.Insert(5);
+            q8.Insert(8);
+            q8.Insert(16);
+            q8.Insert(29);
+
+            Console.WriteLine("\nOriginal queue:");
+            Console.WriteLine(q8);
+            Console.WriteLine("The new queue: "+ OrgQ2couples(q8));
         }
 
         public static Queue<T> SetQCopy<T>(Queue<T> q)
@@ -242,7 +269,7 @@ namespace Qlab
         {
             // The function receives a queue of students and a new student
             // Returns a queue sorted by grade with the new student added
-           
+
             Queue<student> qCopy = SetQCopyS(q);
             bool inserted = false;
             Queue<student> orderQ = EmptyQ2Copy(q);
@@ -256,7 +283,7 @@ namespace Qlab
                 student current = qCopy.Remove();
 
                 // Insert the new student in the correct position
-                if (!inserted && newStudent.GetGrade() < current.GetGrade()) 
+                if (!inserted && newStudent.GetGrade() < current.GetGrade())
                 {
                     q.Insert(newStudent);
                     inserted = true;
@@ -305,7 +332,7 @@ namespace Qlab
             return qCopy;
         }
 
-            public static int LastAndRemove(Queue<int> q)
+        public static int LastAndRemove(Queue<int> q)
         {
             int queueLength = 0;
             int result = 0;
@@ -316,9 +343,9 @@ namespace Qlab
                 queueLength++;
             }
 
-            for(int i = 1; i <= queueLength; i++)
+            for (int i = 1; i <= queueLength; i++)
             {
-                if(i < queueLength)
+                if (i < queueLength)
                 {
                     int number = qCopy.Remove();
                     q.Insert(number);
@@ -328,8 +355,21 @@ namespace Qlab
                     result = qCopy.Remove();
                 }
             }
-            Console.WriteLine(q);
             return result;
         }
+
+        public static Queue<TwoNumbers> OrgQ2couples(Queue<int> q)
+        {
+            Queue<TwoNumbers> q2Num = new Queue<TwoNumbers>();
+            while (!q.IsEmpty())
+            {
+                TwoNumbers num = new TwoNumbers(q.Remove(), LastAndRemove(q));
+                q2Num.Insert(num);
+            }
+            return q2Num;
+        }
+
+
+
     }
 }
