@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +32,17 @@ namespace Qlab
             if (this.first == null)
                 this.last = null;
             return value;
+        }
+        public int Size()
+        {
+            int count = 1;
+            Node<T> curr = this.first;
+            while (curr != this.last)
+            {
+                curr = curr.GetNext();
+                count++;
+            }
+            return count;
         }
         public T Head()
         {
