@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+﻿using System;
+=======
 using System;
+>>>>>>> 3506a7bd770ee8300a914ceefb84b59c448e27b6
 //lior zisser 21/1/2025
 //ניסיתי לעשות את האתגר אבל לא היה לי הרבה זמן אז לא הספקתי להיגע לסיומו
 namespace Qlab
@@ -385,6 +389,7 @@ namespace Qlab
             {
                 int head = q.Remove();
                 Queue<int> qCopy = SetQCopy(q);
+                qCopy.Remove();
                 for (int i = 1;i < q.Size();i++)
                 {
                     if(head + qCopy.Remove() == x)
