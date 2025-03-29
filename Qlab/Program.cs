@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-﻿using System;
+using System;
 =======
 using System;
 >>>>>>> 3506a7bd770ee8300a914ceefb84b59c448e27b6
@@ -122,7 +122,7 @@ namespace Qlab
 
             Console.WriteLine("\nOriginal queue:");
             Console.WriteLine(q8);
-            Console.WriteLine("The new queue: "+ OrgQ2couples(q8));
+            Console.WriteLine("The new queue: " + OrgQ2couples(q8));
 
 
 
@@ -132,7 +132,9 @@ namespace Qlab
             q9.Insert(16);
             q9.Insert(29);
 
-            Console.WriteLine("The result: "+ TwoSum(q9,20));
+            Console.WriteLine("The result: " + TwoSum(q9, 20));
+
+            Console.WriteLine(CheckPalindrome(q9));
         }
 
         public static Queue<T> SetQCopy<T>(Queue<T> q)
@@ -372,6 +374,26 @@ namespace Qlab
             return result;
         }
 
+        public static bool CheckPalindrome(Queue<int> q)
+        {
+            Queue<int> qCopy = SetQCopy(q);
+            bool isPalindrome = false;
+            while (!qCopy.IsEmpty())
+            {
+                if(qCopy.Remove() == LastAndRemove(qCopy))
+                {
+                    isPalindrome = true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return isPalindrome;
+
+        }
+
+
         public static Queue<TwoNumbers> OrgQ2couples(Queue<int> q)
         {
             Queue<TwoNumbers> q2Num = new Queue<TwoNumbers>();
@@ -390,9 +412,9 @@ namespace Qlab
                 int head = q.Remove();
                 Queue<int> qCopy = SetQCopy(q);
                 qCopy.Remove();
-                for (int i = 1;i < q.Size();i++)
+                for (int i = 1; i < q.Size(); i++)
                 {
-                    if(head + qCopy.Remove() == x)
+                    if (head + qCopy.Remove() == x)
                     {
                         return true;
                     }
