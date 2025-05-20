@@ -135,6 +135,7 @@ namespace Qlab
             Console.WriteLine("The result: " + TwoSum(q9, 20));
 
             Console.WriteLine(CheckPalindrome(q9));
+            Console.WriteLine(SumQ(q9,21);
         }
 
         public static Queue<T> SetQCopy<T>(Queue<T> q)
@@ -423,7 +424,78 @@ namespace Qlab
             return false;
         }
 
+        public static int Size(Queue<int> q)
+        {
+            int i = 0;
+            while (!q.IsEmpty())
+            {
+                q.Remove();
+                i++;
+            }
+            return i;
+        }
+        public static bool SumQ(Queue<int>q, int x)
+        {
+            Queue<int> qCopy = SetQCopy(q);
+            for(int i = 0; i<q.Size(); i++)
+            {
+                for(int j = 0; j < q.Size(); j++)
+                {
+                    if(q+qCopy.Remove() == x)
+                    {
+                        return true;
+                    }
+                }
+                q.Remove();
+                qCopy = SetQCopy(q);
+            }
+            return false;
+        }
 
+
+
+
+
+
+
+
+
+
+
+        //-------------תיקון מבחן---------------
+
+
+
+        public static Queue<string> MakePations(Queue<string> positiveResultsQ)
+        // הפונקציה מקבלת תור עם תעודות זהות
+        // מחזירה את התור של המועמדים לטיפול
+        {
+            Queue<string> qSicks = new Queue<string>();
+            Queue<string> temp = new Queue<string>();
+            string currItem;
+            while (!positiveResultsQ.IsEmpty())
+            {
+                bool exists = false;
+                string isSick = positiveResultsQ.Remove();
+                temp = new();
+                for (int i = 0; i < positiveResultsQ.Size(); i++)
+                {
+                    currItem = positiveResultsQ.Remove();
+                    if (isSick == currItem && exists == false)
+                    {
+                        qSicks.Insert(isSick);
+                        exists = true;
+                    }
+                    else if (isSick != currItem)
+                    {
+                        temp.Insert(currItem);
+
+                    }
+                }
+                positiveResultsQ = SetQCopy(temp);
+            }
+            return qSicks;
+        }
 
     }
 }
