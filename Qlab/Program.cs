@@ -137,7 +137,43 @@ namespace Qlab
             Console.WriteLine(CheckPalindrome(q9));
             Console.WriteLine(SumQ(q9,21);
         }
+//-------------תיקון מבחן---------------
 
+
+
+        public static Queue<string> MakePations(Queue<string> positiveResultsQ)
+        // הפונקציה מקבלת תור עם תעודות זהות
+        // מחזירה את התור של המועמדים לטיפול
+        {
+            Queue<string> qSicks = new Queue<string>();
+            Queue<string> temp = new Queue<string>();
+            string currItem;
+            while (!positiveResultsQ.IsEmpty())
+            {
+                bool exists = false;
+                string isSick = positiveResultsQ.Remove();
+                temp = new();
+                for (int i = 0; i < positiveResultsQ.Size(); i++)
+                {
+                    currItem = positiveResultsQ.Remove();
+                    if (isSick == currItem && exists == false)
+                    {
+                        qSicks.Insert(isSick);
+                        exists = true;
+                    }
+                    else if (isSick != currItem)
+                    {
+                        temp.Insert(currItem);
+
+                    }
+                }
+                positiveResultsQ = SetQCopy(temp);
+            }
+            return qSicks;
+        }
+
+
+                              
         public static Queue<T> SetQCopy<T>(Queue<T> q)
         {
             Queue<T> qCopy = new();
@@ -452,50 +488,6 @@ namespace Qlab
             return false;
         }
 
-
-
-
-
-
-
-
-
-
-
-        //-------------תיקון מבחן---------------
-
-
-
-        public static Queue<string> MakePations(Queue<string> positiveResultsQ)
-        // הפונקציה מקבלת תור עם תעודות זהות
-        // מחזירה את התור של המועמדים לטיפול
-        {
-            Queue<string> qSicks = new Queue<string>();
-            Queue<string> temp = new Queue<string>();
-            string currItem;
-            while (!positiveResultsQ.IsEmpty())
-            {
-                bool exists = false;
-                string isSick = positiveResultsQ.Remove();
-                temp = new();
-                for (int i = 0; i < positiveResultsQ.Size(); i++)
-                {
-                    currItem = positiveResultsQ.Remove();
-                    if (isSick == currItem && exists == false)
-                    {
-                        qSicks.Insert(isSick);
-                        exists = true;
-                    }
-                    else if (isSick != currItem)
-                    {
-                        temp.Insert(currItem);
-
-                    }
-                }
-                positiveResultsQ = SetQCopy(temp);
-            }
-            return qSicks;
-        }
 
     }
 }
